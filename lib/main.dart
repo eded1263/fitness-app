@@ -1,5 +1,5 @@
-import 'package:fitness_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fitness_app/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +12,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fitnest X',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
+      onGenerateTitle: (context) => "Fitnest X",
+      initialRoute: RouterGenerator.homePage,
+      onGenerateRoute: RouterGenerator.generateRoute,
+      debugShowCheckedModeBanner: false,
     );
+    // return MaterialApp(
+    //   title: 'Fitnest X',
+    //   theme: ThemeData(
+    //     primarySwatch: Colors.blue,
+    //   ),
+    //   home: const HomePage(),
+    // );
   }
 }

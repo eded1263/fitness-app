@@ -1,8 +1,8 @@
-import 'package:fitness_app/components/buttons/catch_phrase.dart';
-import 'package:fitness_app/components/logo/logo_black.dart';
+import 'package:fitness_app/widgets/buttons/catch_phrase.dart';
+import 'package:fitness_app/widgets/logo/logo_black.dart';
 import 'package:flutter/material.dart';
 
-import '../components/buttons/blue_button.dart';
+import '../widgets/buttons/blue_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
