@@ -1,8 +1,10 @@
+import 'package:fitness_app/routes/goal_page.dart';
 import 'package:fitness_app/routes/home_page.dart';
 import 'package:flutter/material.dart';
 
 class RouterGenerator {
   static const String homePage = '/';
+  static const String goalsPage = '/goals';
   RouterGenerator._();
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -10,11 +12,10 @@ class RouterGenerator {
         return MaterialPageRoute(
           builder: (_) => const HomePage(),
         );
-      // EXEMPLO: Para o form de cadastro
-      // case cadastro:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const FormCadastro(),
-      //   );
+      case goalsPage:
+        return MaterialPageRoute(
+          builder: (_) => const GoalsPage(),
+        );
 
       default:
         throw const FormatException("Rota não encontrada");

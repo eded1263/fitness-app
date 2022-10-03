@@ -1,4 +1,4 @@
-import 'package:fitness_app/widgets/buttons/catch_phrase.dart';
+import 'package:fitness_app/widgets/logo/catch_phrase.dart';
 import 'package:fitness_app/widgets/logo/logo_black.dart';
 import 'package:flutter/material.dart';
 
@@ -27,13 +27,15 @@ class HomePage extends StatelessWidget {
                     right: 25,
                     child: BlueButton(
                       label: "Get Started",
-                      onClick: onClickButton,
+                      onClick: () {
+                        onClickButton(context);
+                      },
                     ))
               ],
             )));
   }
 
-  onClickButton() {
-    print("Fui clicado");
+  onClickButton(BuildContext context) {
+    Navigator.of(context).pushNamed("/goals");
   }
 }
