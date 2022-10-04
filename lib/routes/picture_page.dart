@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:fitness_app/styles/app_styles.dart';
 import 'package:fitness_app/utils/camera.dart';
 import 'package:fitness_app/widgets/picture_taker.dart';
@@ -52,7 +53,6 @@ class _PicturePageState extends State<PicturePage> {
                       child: CameraPreview(_controller),
                     );
                   }
-
                   return Container(
                     height: MediaQuery.of(context).size.height * 0.7,
                     color: Colors.black,
@@ -64,13 +64,16 @@ class _PicturePageState extends State<PicturePage> {
                 bottom: 175,
                 left: 0,
                 right: 0,
-                child: Center(
-                  child: PictureTaker(
-                      changeCamera: _changeCamera,
-                      controller: _controller,
-                      currentCamera: _currentCamera!,
-                      pictureTaken: _pictureTaken),
-                )),
+                child: Center(child: Consumer<AppCache>(
+                  builder: (context, value, child) {
+                    return PictureTaker(
+                        changeCamera: _changeCamera,
+                        controller: _controller,
+                        currentCamera: _currentCamera!,
+                        pictureTaken: (String path) =>
+                            _pictureTaken(path, cache, context));
+                  },
+                ))),
             Positioned(
               bottom: 0,
               child: Container(
@@ -120,7 +123,10 @@ class _PicturePageState extends State<PicturePage> {
     }));
   }
 
-  _pictureTaken(String path) {}
+  _pictureTaken(String path, AppCache cache, BuildContext context) {
+    cache.updateUserPicture(path);
+    Navigator.of(context).pushNamed(RouterGenerator.profilePage);
+  }
 
   _changeCamera() async {
     if (_currentIdxCamera == 0) {

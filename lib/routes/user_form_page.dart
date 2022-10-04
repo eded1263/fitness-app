@@ -23,190 +23,185 @@ class _UserFormPageState extends State<UserFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: [
-        Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(top: 25),
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset(
-                    'assets/images/woman.png',
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const Text.rich(
-                    TextSpan(
-                        text: "Let's complete your profile",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                        )),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text.rich(
-                    TextSpan(
-                        text: "It will help us to know more about you!",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                        )),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
+        body: SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(top: 25),
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/woman.png',
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text.rich(
+                  TextSpan(
+                      text: "Let's complete your profile",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      )),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const Text.rich(
+                  TextSpan(
+                      text: "It will help us to know more about you!",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      )),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              padding: const EdgeInsets.all(25),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    alignment: Alignment.center,
-                    child: DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            padding: const EdgeInsets.all(25),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color.fromARGB(255, 239, 242, 243),
+                        prefixIcon: const Icon(Icons.people_outline,
+                            color: Color.fromARGB(255, 141, 140, 140)),
+                        hintText: 'Choose Gender',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide.none)),
+                    value: _selectedGender,
+                    items: _genders
+                        .map((item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: Text(item,
+                                  style: const TextStyle(
+                                      fontSize: 15, color: Colors.black)),
+                            ))
+                        .toList(),
+                    onChanged: (item) => setState(() => _selectedGender = item),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: _dateOfBirthController,
+                        decoration: InputDecoration(
                           filled: true,
                           fillColor: const Color.fromARGB(255, 239, 242, 243),
-                          prefixIcon: const Icon(Icons.people_outline,
+                          labelText: "Date of Birth",
+                          labelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 141, 140, 140),
+                          ),
+                          prefixIcon: const Icon(Icons.today,
                               color: Color.fromARGB(255, 141, 140, 140)),
-                          hintText: 'Choose Gender',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide.none)),
-                      value: _selectedGender,
-                      items: _genders
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(item,
-                                    style: const TextStyle(
-                                        fontSize: 15, color: Colors.black)),
-                              ))
-                          .toList(),
-                      onChanged: (item) =>
-                          setState(() => _selectedGender = item),
-                    ),
+                          border: myinputborder(),
+                          enabledBorder: myinputborder(),
+                          focusedBorder: myfocusborder(),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Column(
-                      children: [
-                        TextField(
-                          controller: _dateOfBirthController,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  color: Colors.white,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          controller: _weightController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: const Color.fromARGB(255, 239, 242, 243),
-                            labelText: "Date of Birth",
+                            labelText: "Your Weight",
                             labelStyle: const TextStyle(
                               color: Color.fromARGB(255, 141, 140, 140),
                             ),
-                            prefixIcon: const Icon(Icons.today,
+                            prefixIcon: const Icon(Icons.scale,
                                 color: Color.fromARGB(255, 141, 140, 140)),
                             border: myinputborder(),
                             enabledBorder: myinputborder(),
                             focusedBorder: myfocusborder(),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      _measureBox("KG")
+                    ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    alignment: Alignment.bottomLeft,
-                    color: Colors.white,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  color: Colors.white,
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
                           child: TextField(
-                            controller: _weightController,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor:
-                                  const Color.fromARGB(255, 239, 242, 243),
-                              labelText: "Your Weight",
-                              labelStyle: const TextStyle(
-                                color: Color.fromARGB(255, 141, 140, 140),
-                              ),
-                              prefixIcon: const Icon(Icons.scale,
-                                  color: Color.fromARGB(255, 141, 140, 140)),
-                              border: myinputborder(),
-                              enabledBorder: myinputborder(),
-                              focusedBorder: myfocusborder(),
-                            ),
+                        controller: _heightController,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 239, 242, 243),
+                          labelText: "Your Height",
+                          labelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 141, 140, 140),
                           ),
+                          prefixIcon: const Icon(Icons.swap_vert,
+                              color: Color.fromARGB(255, 141, 140, 140)),
+                          border: myinputborder(),
+                          enabledBorder: myinputborder(),
+                          focusedBorder: myfocusborder(),
                         ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        _measureBox("KG")
-                      ],
-                    ),
+                      )),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      _measureBox("CM")
+                    ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    alignment: Alignment.bottomLeft,
-                    color: Colors.white,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                            child: TextField(
-                          controller: _heightController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: const Color.fromARGB(255, 239, 242, 243),
-                            labelText: "Your Height",
-                            labelStyle: const TextStyle(
-                              color: Color.fromARGB(255, 141, 140, 140),
-                            ),
-                            prefixIcon: const Icon(Icons.swap_vert,
-                                color: Color.fromARGB(255, 141, 140, 140)),
-                            border: myinputborder(),
-                            enabledBorder: myinputborder(),
-                            focusedBorder: myfocusborder(),
-                          ),
-                        )),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        _measureBox("CM")
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        Positioned(
-            bottom: 25,
-            left: 25,
-            right: 25,
-            child: Consumer<AppCache>(
-              builder: (context, cache, child) {
-                return BlueButton(
-                  label: "Next",
-                  onClick: () {
-                    _submitDataAndRedirect(cache, context);
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Consumer<AppCache>(
+                  builder: (context, cache, child) {
+                    return BlueButton(
+                      label: "Next",
+                      onClick: () {
+                        _submitDataAndRedirect(cache, context);
+                      },
+                    );
                   },
-                );
-              },
-            ))
-      ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
     ));
   }
 
@@ -214,7 +209,7 @@ class _UserFormPageState extends State<UserFormPage> {
     cache.setUserData(_selectedGender!, _dateOfBirthController.text,
         _weightController.text, _heightController.text);
 
-    Navigator.of(context).pushNamed(RouterGenerator.profilePage);
+    Navigator.of(context).pushNamed(RouterGenerator.picturesPage);
   }
 
   _measureBox(String measure) {

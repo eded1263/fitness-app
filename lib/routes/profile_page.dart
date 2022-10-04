@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fitness_app/routes.dart';
 import 'package:fitness_app/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,12 +14,16 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      padding: const EdgeInsets.all(25),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 50),
       child: Consumer<AppCache>(
           builder: (context, cache, child) => Column(children: [
                 Row(
                   children: [
-                    CircleAvatar(child: Image.file(File(cache.user.picture))),
+                    CircleAvatar(
+                        child: Image.file(
+                      File(cache.user.picture),
+                      fit: BoxFit.fill,
+                    )),
                     const SizedBox(
                       width: 10,
                     ),

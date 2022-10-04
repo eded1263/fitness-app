@@ -275,7 +275,7 @@ class _SignInTenState extends State<SignInTen> {
       return BlueButton(
         onClick: () {
           cache.setUserEmail(emailController.text);
-          Navigator.of(context).pushNamed(RouterGenerator.userFormPage);
+          Navigator.of(context).pushNamed(RouterGenerator.goalsPage);
         },
         label: "Login",
         prependIcon: Icons.login,

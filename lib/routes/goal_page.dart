@@ -1,5 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:fitness_app/models/goal.dart';
 import 'package:fitness_app/styles/app_styles.dart';
 import 'package:fitness_app/widgets/buttons/blue_button.dart';
 import 'package:flutter/material.dart';
@@ -113,6 +112,6 @@ class _GoalsPageState extends State<GoalsPage> {
 
   void _selectGoalType(AppCache cache, BuildContext context) {
     cache.setUserGoal(cache.goalTypes[_indexAtual]);
-    Navigator.of(context).pushNamed(RouterGenerator.picturesPage);
+    Navigator.of(context).pushNamed(RouterGenerator.userFormPage);
   }
 }
