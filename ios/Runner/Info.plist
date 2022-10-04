@@ -43,7 +43,17 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Take photos using your cameras</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Record audio for videos</string>
+	<key>NsPhotoLibraryUsageDescription</key>
+	<string>Save your photos to the gallery</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<string></string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 </dict>
 </plist>

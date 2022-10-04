@@ -1,7 +1,12 @@
+import 'package:fitness_app/cache/cache.dart';
+import 'package:fitness_app/utils/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/routes.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Camera().loadCameras();
   runApp(const MyApp());
 }
 
@@ -11,18 +16,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateTitle: (context) => "Fitnest X",
-      initialRoute: RouterGenerator.homePage,
-      onGenerateRoute: RouterGenerator.generateRoute,
-      debugShowCheckedModeBanner: false,
-    );
-    // return MaterialApp(
-    //   title: 'Fitnest X',
-    //   theme: ThemeData(
-    //     primarySwatch: Colors.blue,
-    //   ),
-    //   home: const HomePage(),
-    // );
+    return Provider(
+        create: (_) => AppCache(),
+        child: MaterialApp(
+          onGenerateTitle: (context) => "Fitnest X",
+          initialRoute: RouterGenerator.homePage,
+          onGenerateRoute: RouterGenerator.generateRoute,
+          debugShowCheckedModeBanner: false,
+        ));
   }
 }

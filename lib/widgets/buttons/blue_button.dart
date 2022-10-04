@@ -1,3 +1,4 @@
+import 'package:fitness_app/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class BlueButton extends StatelessWidget {
@@ -14,7 +15,10 @@ class BlueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: _containerDecoration(),
+        decoration: AppStyles.containerGradientDecoration(shadows: [
+          const BoxShadow(
+              color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
+        ]),
         width: MediaQuery.of(context).size.width * buttonSize,
         child: ElevatedButton(
           onPressed: onClick,
@@ -33,25 +37,6 @@ class BlueButton extends StatelessWidget {
       minimumSize: MaterialStateProperty.all(const Size(50, 60)),
       backgroundColor: MaterialStateProperty.all(Colors.transparent),
       shadowColor: MaterialStateProperty.all(Colors.transparent),
-    );
-  }
-
-  BoxDecoration _containerDecoration() {
-    return BoxDecoration(
-      boxShadow: const [
-        BoxShadow(color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
-      ],
-      gradient: const LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        stops: [0.0, 1.0],
-        colors: [
-          Color(0xff9DCEFF),
-          Color(0xff92A3FD),
-        ],
-      ),
-      color: const Color(0xff92A3FD),
-      borderRadius: BorderRadius.circular(50),
     );
   }
 }

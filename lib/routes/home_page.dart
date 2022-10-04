@@ -1,3 +1,4 @@
+import 'package:fitness_app/routes.dart';
 import 'package:fitness_app/widgets/logo/catch_phrase.dart';
 import 'package:fitness_app/widgets/logo/logo_black.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,6 @@ class HomePage extends StatelessWidget {
   }
 
   onClickButton(BuildContext context) {
-    Navigator.of(context).pushNamed("/goals");
+    Navigator.of(context).pushNamed(RouterGenerator.loginPage);
   }
 }
