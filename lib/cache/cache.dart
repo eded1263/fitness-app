@@ -47,7 +47,7 @@ class AppCache {
   UnmodifiableListView<UserObjective> get objectives =>
       UnmodifiableListView<UserObjective>(_userObjectives);
 
-  User _user = User("", "");
+  User _user = User("John", "Doe");
 
   void setUser(String name, String surname) {
     _user = User(name, surname);

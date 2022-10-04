@@ -9,6 +9,10 @@ class User {
   String height = "";
   String weight = "";
   String dateOfBirth = "";
-  late Goal goal;
+  late Goal goal = Goal(
+      name: "Improve Shape",
+      image: "assets/images/improve_shape.png",
+      description:
+          "I have a low amount of body fat and need / want to build more muscle");
   User(this.name, this.surname);
 }

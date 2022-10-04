@@ -1,6 +1,8 @@
 import 'package:fitness_app/cache/cache.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:fitness_app/widgets/buttons/blue_button.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class UserFormPage extends StatefulWidget {
@@ -199,8 +201,7 @@ class _UserFormPageState extends State<UserFormPage> {
                 return BlueButton(
                   label: "Next",
                   onClick: () {
-                    _submitDataAndRedirect(cache);
-                    print(cache.user.height);
+                    _submitDataAndRedirect(cache, context);
                   },
                 );
               },
@@ -209,9 +210,11 @@ class _UserFormPageState extends State<UserFormPage> {
     ));
   }
 
-  void _submitDataAndRedirect(AppCache cache) {
+  void _submitDataAndRedirect(AppCache cache, BuildContext context) {
     cache.setUserData(_selectedGender!, _dateOfBirthController.text,
         _weightController.text, _heightController.text);
+
+    Navigator.of(context).pushNamed(RouterGenerator.profilePage);
   }
 
   _measureBox(String measure) {
