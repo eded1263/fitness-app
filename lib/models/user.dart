@@ -4,6 +4,7 @@ class User {
   String name;
   String surname;
   String picture = "";
+  String email = "";
   late Goal goal;
   User(this.name, this.surname);
 }

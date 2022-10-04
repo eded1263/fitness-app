@@ -61,6 +61,10 @@ class AppCache {
     _user.goal = goal;
   }
 
+  void setUserEmail(String email) {
+    _user.email = email;
+  }
+
   void updateUserName(String name, String surname) {
     _user.name = name != "" ? name : _user.name;
     _user.surname = surname != "" ? surname : _user.surname;

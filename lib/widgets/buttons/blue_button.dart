@@ -2,15 +2,17 @@ import 'package:fitness_app/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class BlueButton extends StatelessWidget {
-  const BlueButton(
+  BlueButton(
       {super.key,
       required this.onClick,
       required this.label,
+      this.icon,
       this.buttonSize = 1});
 
   final Function() onClick;
   final String label;
   final double buttonSize;
+  IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,21 @@ class BlueButton extends StatelessWidget {
         ]),
         width: MediaQuery.of(context).size.width * buttonSize,
         child: ElevatedButton(
-          onPressed: onClick,
-          style: _getStyle(),
-          child: Text(label),
-        ));
+            onPressed: onClick, style: _getStyle(), child: _buildContent()));
+  }
+
+  _buildContent() {
+    if (icon != null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.login),
+          const SizedBox(width: 10),
+          Text(label),
+        ],
+      );
+    }
+    return Text(label);
   }
 
   ButtonStyle _getStyle() {

@@ -1,6 +1,9 @@
+import 'package:fitness_app/cache/cache.dart';
+import 'package:fitness_app/widgets/buttons/blue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SignInTen extends StatefulWidget {
   const SignInTen({Key? key}) : super(key: key);
@@ -35,7 +38,6 @@ class _SignInTenState extends State<SignInTen> {
 
   Widget buildCard(Size size) {
     return Container(
-      alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       width: size.width * 0.9,
       height: size.height * 0.8,
@@ -44,25 +46,17 @@ class _SignInTenState extends State<SignInTen> {
         color: Colors.white,
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //logo & login text here
           Expanded(
-            flex: 3,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                logo(size.height / 8, size.height / 8),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
                 richText(1),
               ],
             ),
           ),
-
-          //email , password textField and rememberForget text here
           Expanded(
             flex: 3,
             child: Column(
@@ -78,7 +72,7 @@ class _SignInTenState extends State<SignInTen> {
                 ),
 
                 //remember & forget text
-                buildRemember_ForgetSection(size),
+                buildRememberForgetSection(size),
               ],
             ),
           ),
@@ -102,7 +96,7 @@ class _SignInTenState extends State<SignInTen> {
                 ),
 
                 //sign in with google & facebook button here
-                google_facebookButton(size),
+                googleFacebookButton(size),
               ],
             ),
           ),
@@ -113,37 +107,30 @@ class _SignInTenState extends State<SignInTen> {
 
   Widget logo(double height_, double width_) {
     return SvgPicture.asset(
-      'assets/',
+      'assets/images/',
       height: height_,
       width: width_,
     );
   }
 
   Widget richText(double fontSize) {
-    return Text.rich(
-      TextSpan(
-        style: GoogleFonts.inter(
-          color: Color.fromARGB(255, 22, 15, 10),
-          letterSpacing: 2.000000061035156,
+    return Column(
+      children: const [
+        Text(
+          'Hey there,',
+          style: TextStyle(
+            fontSize: 18,
+          ),
         ),
-        children: const [
-          TextSpan(
-            text: 'Hey there,',
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 18,
-            ),
+        Text(
+          'Welcome Back',
+          style: TextStyle(
+            color: Color.fromARGB(255, 22, 15, 10),
+            fontSize: 26,
+            fontWeight: FontWeight.w900,
           ),
-          TextSpan(
-            text: 'Welcome Back',
-            style: TextStyle(
-              color: Color.fromARGB(255, 22, 15, 10),
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -174,7 +161,7 @@ class _SignInTenState extends State<SignInTen> {
               borderSide: BorderSide(
                 color: emailController.text.isEmpty
                     ? Colors.transparent
-                    : Color.fromARGB(255, 22, 24, 24),
+                    : const Color.fromARGB(255, 22, 24, 24),
               )),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
@@ -185,7 +172,7 @@ class _SignInTenState extends State<SignInTen> {
             Icons.mail_outline_rounded,
             color: emailController.text.isEmpty
                 ? const Color(0xFF151624).withOpacity(0.5)
-                : Color.fromARGB(255, 32, 34, 34),
+                : const Color.fromARGB(255, 32, 34, 34),
             size: 16,
           ),
           suffix: Container(
@@ -264,53 +251,34 @@ class _SignInTenState extends State<SignInTen> {
     );
   }
 
-  Widget buildRemember_ForgetSection(Size size) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 75.0),
-      child: Row(
-        children: [
-          const Spacer(),
-          Text(
-            'Forgot your password?',
-            style: GoogleFonts.inter(
-              fontSize: 13.0,
-              color: Color.fromARGB(255, 156, 142, 136),
-              fontWeight: FontWeight.w500,
-              decoration: TextDecoration.underline,
-            ),
-            textAlign: TextAlign.center,
+  Widget buildRememberForgetSection(Size size) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Forgot your password?',
+          style: GoogleFonts.inter(
+            fontSize: 13.0,
+            color: const Color.fromARGB(255, 156, 142, 136),
+            fontWeight: FontWeight.w500,
+            decoration: TextDecoration.underline,
           ),
-        ],
-      ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 
   Widget signInButton(Size size) {
-    return Container(
-      alignment: Alignment.center,
-      height: size.height / 13,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        color: Color.fromARGB(255, 121, 153, 223),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 140, 151, 247).withOpacity(0.2),
-            offset: const Offset(0, 15.0),
-            blurRadius: 60.0,
-          ),
-        ],
-      ),
-      child: Text(
-        'Login',
-        style: GoogleFonts.inter(
-          fontSize: 16.0,
-          color: Colors.white,
-          fontWeight: FontWeight.w600,
-          height: 1.5,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
+    return Consumer<AppCache>(builder: ((context, cache, child) {
+      return BlueButton(
+        onClick: () {
+          cache.setUserEmail(emailController.value.toString());
+        },
+        label: "Login",
+        icon: Icons.login,
+      );
+    }));
   }
 
   Widget buildNoAccountText() {
@@ -345,7 +313,7 @@ class _SignInTenState extends State<SignInTen> {
     );
   }
 
-  Widget google_facebookButton(Size size) {
+  Widget googleFacebookButton(Size size) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -358,7 +326,7 @@ class _SignInTenState extends State<SignInTen> {
             borderRadius: BorderRadius.circular(10.0),
             border: Border.all(
               width: 1.0,
-              color: Color.fromARGB(255, 185, 185, 185),
+              color: const Color.fromARGB(255, 185, 185, 185),
             ),
           ),
           child: Row(
@@ -394,7 +362,7 @@ class _SignInTenState extends State<SignInTen> {
             borderRadius: BorderRadius.circular(10.0),
             border: Border.all(
               width: 1.0,
-              color: Color.fromARGB(255, 185, 185, 185),
+              color: const Color.fromARGB(255, 185, 185, 185),
             ),
           ),
           child: Row(

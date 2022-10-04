@@ -6,8 +6,13 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Camera().loadCameras();
-  runApp(const MyApp());
+  try {
+    await Camera().loadCameras();
+  } catch (exception) {
+    print("exception");
+  } finally {
+    runApp(const MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {
