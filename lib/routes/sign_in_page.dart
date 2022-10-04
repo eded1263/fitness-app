@@ -1,4 +1,5 @@
 import 'package:fitness_app/cache/cache.dart';
+import 'package:fitness_app/routes.dart';
 import 'package:fitness_app/widgets/buttons/blue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -273,10 +274,11 @@ class _SignInTenState extends State<SignInTen> {
     return Consumer<AppCache>(builder: ((context, cache, child) {
       return BlueButton(
         onClick: () {
-          cache.setUserEmail(emailController.value.toString());
+          cache.setUserEmail(emailController.text);
+          Navigator.of(context).pushNamed(RouterGenerator.userFormPage);
         },
         label: "Login",
-        icon: Icons.login,
+        prependIcon: Icons.login,
       );
     }));
   }

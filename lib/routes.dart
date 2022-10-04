@@ -2,6 +2,7 @@ import 'package:fitness_app/routes/goal_page.dart';
 import 'package:fitness_app/routes/home_page.dart';
 import 'package:fitness_app/routes/picture_page.dart';
 import 'package:fitness_app/routes/sign_in_page.dart';
+import 'package:fitness_app/routes/user_form_page.dart';
 import 'package:flutter/material.dart';
 
 class RouterGenerator {
@@ -9,6 +10,7 @@ class RouterGenerator {
   static const String goalsPage = '/goals';
   static const String picturesPage = '/picture';
   static const String loginPage = '/login';
+  static const String userFormPage = '/userForm';
 
   RouterGenerator._();
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -28,6 +30,10 @@ class RouterGenerator {
       case picturesPage:
         return MaterialPageRoute(
           builder: (_) => const PicturePage(),
+        );
+      case userFormPage:
+        return MaterialPageRoute(
+          builder: (_) => UserFormPage(),
         );
 
       default:

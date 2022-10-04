@@ -1,18 +1,21 @@
 import 'package:fitness_app/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class BlueButton extends StatelessWidget {
   BlueButton(
       {super.key,
       required this.onClick,
       required this.label,
-      this.icon,
+      this.prependIcon,
+      this.appendIcon,
       this.buttonSize = 1});
 
   final Function() onClick;
   final String label;
   final double buttonSize;
-  IconData? icon;
+  IconData? prependIcon;
+  IconData? appendIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +29,17 @@ class BlueButton extends StatelessWidget {
             onPressed: onClick, style: _getStyle(), child: _buildContent()));
   }
 
-  _buildContent() {
-    if (icon != null) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.login),
-          const SizedBox(width: 10),
-          Text(label),
-        ],
-      );
-    }
-    return Text(label);
+  Row _buildContent() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        prependIcon != null ? Icon(prependIcon) : Container(),
+        const SizedBox(width: 10),
+        Text(label),
+        const SizedBox(width: 10),
+        appendIcon != null ? Icon(appendIcon) : Container(),
+      ],
+    );
   }
 
   ButtonStyle _getStyle() {

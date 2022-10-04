@@ -65,6 +65,13 @@ class AppCache {
     _user.email = email;
   }
 
+  void setUserData(String gender, String dob, String weight, String height) {
+    _user.gender = gender;
+    _user.weight = weight;
+    _user.height = height;
+    _user.dateOfBirth = dob;
+  }
+
   void updateUserName(String name, String surname) {
     _user.name = name != "" ? name : _user.name;
     _user.surname = surname != "" ? surname : _user.surname;
